@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<fileset-config file-format-version="1.2.0" simple-config="false" sync-formatter="false">
+  <local-check-config name="Rules" location="D:\Documents\MEGA\Final Year Project\Project\RestructureIt\lib\CheckStyleConfig.xml" type="external" description="">
+    <additional-data name="protect-config-file" value="false"/>
+  </local-check-config>
+  <fileset name="all" enabled="false" check-config-name="Rules" local="true">
+    <file-match-pattern match-pattern="." include-pattern="true"/>
+  </fileset>
+  <fileset name="r" enabled="true" check-config-name="Rules" local="true">
+    <file-match-pattern match-pattern=".java$" include-pattern="true"/>
+    <file-match-pattern match-pattern="src/test" include-pattern="false"/>
+    <file-match-pattern match-pattern="restructureit.refactorings.utils.templates" include-pattern="false"/>
+  </fileset>
+</fileset-config>
