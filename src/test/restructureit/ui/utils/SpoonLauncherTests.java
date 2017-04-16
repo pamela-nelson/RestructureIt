@@ -3,11 +3,10 @@
  */
 package restructureit.ui.utils;
 
-import static org.junit.Assert.*;
+
 
 import java.io.File;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -382,7 +381,7 @@ public class SpoonLauncherTests {
 		boolean isProcessedValue = (boolean) isProcessed.get(launcher);
 		
 		Assert.assertTrue(isProcessedValue);
-		fail("Not yet implemented");
+		Assert.fail("Not yet implemented");
 	}
 	
 	/**
@@ -457,7 +456,7 @@ public class SpoonLauncherTests {
 		launcher.processRefactoring();
 		launcher.outputProcessedCode();
 		Assert.assertTrue(new File("src/test/resources/restructureit/test/utils/SpoonLauncherTests/SpoonLauncherTests.java").isFile());
-		fail("Not yet implemented");
+		Assert.fail("Not yet implemented");
 	}
 
 }

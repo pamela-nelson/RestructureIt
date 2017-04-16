@@ -3,6 +3,7 @@ package restructureit;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import restructureit.utils.SpoonLauncher;
+import spoon.support.compiler.FileSystemFolder;
 
 /**
  * 
@@ -23,6 +24,7 @@ public class Main extends Application {
 		launcher.setOutputSource("results/");
 		launcher.addRefactoring("restructureit.refactorings.EncapsulateField");
 		launcher.addRefactoring("restructureit.refactorings.utils.processors.UpdateFieldAccessReferences");
+		launcher.addTemplate(new FileSystemFolder("src/main/restructureit/refactorings/utils/templates"));
 		launcher.processRefactoring();
 		launcher.outputProcessedCode();
 		

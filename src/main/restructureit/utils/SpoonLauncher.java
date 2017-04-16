@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import spoon.Launcher;
+import spoon.compiler.SpoonResource;
 import spoon.processing.Processor;
 import spoon.reflect.CtModel;
 
@@ -32,12 +33,17 @@ public class SpoonLauncher {
 	private List<String> refactorings;
 	
 	/**
+	 * List of templates to be applied.
+	 */
+	private List<SpoonResource> templates;
+	
+	/**
 	 * Location to output the refactored code.
 	 **/
 	private String outputSource;
 	
 	/**
-	 * Indicates whether the input code has been rafactored.
+	 * Indicates whether the input code has been refactored.
 	 */
 	private boolean isProcessed;
 	
@@ -55,6 +61,7 @@ public class SpoonLauncher {
 		launcher = new Launcher();
 		inputSources = new ArrayList<String>();
 		refactorings = new ArrayList<String>();
+		templates = new ArrayList<SpoonResource>();
 		outputSource = "";
 		isProcessed = false;
 		isModelBuilt = false;
@@ -154,6 +161,13 @@ public class SpoonLauncher {
 	}
 	
 	/**
+	 * @return the list of added templates
+	 */
+	public List<SpoonResource> getTemplates() {
+		return templates;
+	}
+
+	/**
 	 * Returns the model built from the input sources given.
 	 * @return program AST model
 	 */
@@ -245,6 +259,16 @@ public class SpoonLauncher {
 		}
 	}
 	
+	/**
+	 * Adds the given template to the launcher.
+	 * @param template template to be added to launcher
+	 */
+	public void addTemplate(final SpoonResource template) {
+		if (!templates.contains(template)) {
+			templates.add(template);
+			launcher.addTemplateResource(template);
+		}
+	}
 	
 	/**
 	 * Refactors the given input source code.
@@ -268,7 +292,7 @@ public class SpoonLauncher {
 		}
 	}
 	
-	//PRIVATE METHODS (CLEAR PARAMETER)
+	//PRIVATE METHODS (CLEAR PARAMETER/ SET TEMPLATES)
 	/**
 	 * Resets/Clears the given parameter in the launcher.
 	 * @param parameterToClear accepts "input", "refactoring", "output" and "all"
@@ -283,14 +307,27 @@ public class SpoonLauncher {
 		switch (parameterToClear) {
 			case "input": 		setRefactorings(getRefactorings());
 								setOutputSource(getOutputSource());
+								setTemplateResources(getTemplates());
 								break;
 			case "refactoring": setInputSources(getInputSources());
 							    setOutputSource(getOutputSource());
+							    setTemplateResources(getTemplates());
 							    break;
 			case "output":		setInputSources(getInputSources());
 								setRefactorings(getRefactorings());
+								setTemplateResources(getTemplates());
 								break;
 			case "all":			break;
+		}
+	}
+	
+	/**
+	 * Sets the templates for the launcher. SHould only be done by spoonLauncher class.
+	 * @param templates templates
+	 */
+	private void setTemplateResources(final List<SpoonResource> templates) {
+		for (SpoonResource template : templates) {
+			addTemplate(template);
 		}
 	}
 	

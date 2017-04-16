@@ -1,14 +1,21 @@
 package restructureit.refactorings.utils.processors;
 
 
-import restructureit.refactorings.EncapsulateField;
+import restructureit.refactorings.processors.EncapsulateField;
+import restructureit.refactorings.utils.templates.FieldAccessTemplate;
 import restructureit.refactorings.utils.templates.GetterInvocationTemplate;
 import spoon.processing.AbstractProcessor;
-import spoon.reflect.code.CtFieldAccess;
+import spoon.reflect.code.CtBlock;
+import spoon.reflect.code.CtExpression;
 import spoon.reflect.code.CtFieldRead;
-import spoon.reflect.code.CtStatement;
+import spoon.reflect.code.CtThisAccess;
+import spoon.reflect.declaration.CtClass;
+import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.reference.CtFieldReference;
+import spoon.reflect.visitor.filter.NameFilter;
+import spoon.template.Substitution;
 import spoon.template.Template;
+import spoon.template.TemplateMatcher;
 
 /**
  * A utility class that assists with the EncapsulateField refactoring. 
@@ -17,7 +24,7 @@ import spoon.template.Template;
  * 
  * @author Pamela
  */
-public class UpdateFieldAccessReferences extends AbstractProcessor<CtFieldAccess<?>> {
+public class UpdateFieldAccessReferences extends AbstractProcessor<CtFieldRead<?>> {
 
 	/**
 	 * Determines whether the field should be processed.
@@ -26,7 +33,7 @@ public class UpdateFieldAccessReferences extends AbstractProcessor<CtFieldAccess
 	 * @param candidate Field of AST to check
 	 * @return should field be processed
 	 */
-	public boolean isToBeProcessed(final CtFieldAccess<?> candidate) {
+	public boolean isToBeProcessed(final CtFieldRead<?> candidate) {
 		CtFieldReference<?> field = candidate.getVariable();
 		
 		if (EncapsulateField.getProcessedFields().contains(field)) {
@@ -41,23 +48,40 @@ public class UpdateFieldAccessReferences extends AbstractProcessor<CtFieldAccess
 	 * instead of direct access.
 	 * @param fieldReference field access to be refactored to use getters/setters.
 	 */
-	public void process(final CtFieldAccess<?> fieldReference) {
+	public void process(final CtFieldRead<?> fieldReference) {
 		
 		// TODO Auto-generated method stub
 		CtFieldReference<?> field = fieldReference.getVariable();
 		
+		CtClass<?> templateClass = getFactory().Class().get(GetterInvocationTemplate.class);
+		CtMethod<?> templateRoot = (CtMethod<?>) templateClass.getElements(new NameFilter("get_Field_")).get(0);
+		
+		TemplateMatcher templateMatcher = new TemplateMatcher(templateRoot);
+		if (templateMatcher.find(fieldReference.getParent(CtMethod.class)).size() == 0) {
+		
+        
 		//requires Getter
-		if (fieldReference instanceof CtFieldRead) {
-			Template<?> getterTemplate = new GetterInvocationTemplate(field.getType(), field.getSimpleName(), 
-					fieldReference);
+			Template<?> getterTemplate = new FieldAccessTemplate(field.getType(), field.getSimpleName(), 
+					fieldReference, null);
 			
-			CtStatement getterReference = (CtStatement) getterTemplate.apply(null);
-			if (getterReference != null) {
-				System.out.println("IM IN HERE!");
-				fieldReference.replace(getterReference);
-			}
+			CtBlock<?> getterBlah = Substitution.substituteMethodBody(fieldReference.getParent(CtClass.class), getterTemplate, 
+					"getterInvocation");
+			//getterBlah.getStatement(0);
+			//CtExecutableReference<?> reference = getterBlah.getStatement(0).
 			
-		} /*else if (fieldReference instanceof CtAssignment) {
+			CtExpression<?> targetObject = (CtExpression) fieldReference.getTarget();
+			
+			//Direct call to getter
+			if (targetObject instanceof CtThisAccess<?>) {
+				//String fieldName = field.getSimpleName().substring(0, 1).toUpperCase() + field.getSimpleName().substring(1);
+				//CtCodeSnippetExpression<?> getterReference = getFactory().Code().createCodeSnippetExpression("get" + fieldName + "()");
+				//getterReference.compile();
+				//CtBlock<?> getterReferenceBody = getFactory().Code().createCtBlock(getterReference);
+				fieldReference.replace(getterBlah.getStatement(0));
+			} 
+			
+			
+		/*} else if (fieldReference instanceof CtAssignment) {
 			CtAssignment<?, ?> assignment = (CtAssignment<?, ?>) fieldReference;
 			
 			Template setterTemplate = new UpdateFieldReferencesTemplate(field.getType(), field.getSimpleName(), 
@@ -69,5 +93,8 @@ public class UpdateFieldAccessReferences extends AbstractProcessor<CtFieldAccess
 				assignment.replace(setterReference.getStatements().get(0));
 			}
 		}*/
+		} else {
+			System.out.println("BOOOOOOOOOO!");
+		}
 	}
 }
