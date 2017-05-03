@@ -41,6 +41,13 @@ public static double getCoupling() {
 }
 
 /**
+ * Resets coupling value to zero.
+ */
+public static void resetCouplingValue() {
+	coupling = 0;
+}
+
+/**
  * Calculates the coupling of the project.
  * @param ctClass  class in project
  */
@@ -65,7 +72,11 @@ public void processingDone() {
 		
 		CtClass<?> fieldType;
 		for (CtField<?> field : fields) {
-			fieldType = (CtClass<?>) field.getType().getDeclaration();
+			if (field.getType().getDeclaration() instanceof CtClass) {
+				fieldType = (CtClass<?>) field.getType().getDeclaration();
+			} else {
+				continue;
+			}
 			
 			if (classesInProject.contains(fieldType)) {
 				distinctClasses.add(fieldType);
@@ -80,7 +91,11 @@ public void processingDone() {
 			parameterTypes = method.getParameters();
 			
 			for (CtParameter<?> parameterType : parameterTypes) {
-				methodType = (CtClass<?>) parameterType.getType().getDeclaration();
+				if (parameterType.getType().getDeclaration() instanceof CtClass) {
+					methodType = (CtClass<?>) parameterType.getType().getDeclaration();
+				} else {
+					continue;
+				}
 				
 				if (classesInProject.contains(methodType)) {
 					distinctClasses.add(methodType);

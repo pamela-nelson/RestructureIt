@@ -31,6 +31,13 @@ public class EncapsulationCalculator extends AbstractProcessor<CtClass<?>> {
 	public static double getEncapsulation() {
 		return encapsulation;
 	}
+	
+	/**
+	 * Resets encapsulation value to zero.
+	 */
+	public static void resetEncapsulationValue() {
+		encapsulation = 0;
+	}
 
 	/**
 	 * Calculates the encapsulation of the project.

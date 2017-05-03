@@ -4,22 +4,23 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import restructureit.utils.SpoonLauncher;
+import restructureit.utils.QualityMeasurementTask;
+import restructureit.utils.RefactoringTask;
 
 public class CouplingCalculatorTests {
 
-	public SpoonLauncher launcher;
+	public RefactoringTask launcher;
 	
 	/**
 	 * Sets up the Spoon Launcher for each test.
 	 */
 	@Before
 	public void setUp() throws Exception {
-		launcher = new SpoonLauncher();
+		launcher = new RefactoringTask();
 		launcher.addInputSource("src/test/resources/restructureit/qualitymeasurement/processors/coupling");
 		launcher.setOutputSource("src/test/resources/restructureit/qualitymeasurement/processors/coupling/");
-		launcher.addRefactoring("restructureit.qualitymeasurement.processors.CouplingCalculator");
-		launcher.processRefactoring();
+		launcher.addProcessor("restructureit.qualitymeasurement.processors.CouplingCalculator");
+		launcher.processCode();
 	}
 
 	/**

@@ -1,0 +1,9 @@
+restructureit
+restructureit.qualitymeasurement
+restructureit.qualitymeasurement.processors
+restructureit.qualitymeasurement.utils
+restructureit.refactorings.processors
+restructureit.refactorings.utils
+restructureit.ui.controllers
+restructureit.ui.views
+restructureit.utils

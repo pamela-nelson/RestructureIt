@@ -34,6 +34,13 @@ public class CompositionCalculator extends AbstractProcessor<CtClass<?>> {
 	public static double getComposition() {
 		return composition;
 	}
+	
+	/**
+	 * Resets composition value to zero.
+	 */
+	public static void resetCompositionValue() {
+		composition = 0;
+	}
 
 	/**
 	 * Calculates the composition of the project.

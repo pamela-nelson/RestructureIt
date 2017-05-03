@@ -35,6 +35,13 @@ public class CohesionCalculator extends AbstractProcessor<CtClass<?>> {
 	}
 	
 	/**
+	 * Resets cohesion value to zero.
+	 */
+	public static void resetCohesionValue() {
+		cohesion = 0;
+	}
+	
+	/**
 	 * Calculates the average cohesion of the project.
 	 * @param ctClass  class in project
 	 */

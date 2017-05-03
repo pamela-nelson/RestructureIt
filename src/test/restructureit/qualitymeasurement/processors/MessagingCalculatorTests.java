@@ -4,22 +4,23 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import restructureit.utils.SpoonLauncher;
+import restructureit.utils.QualityMeasurementTask;
+import restructureit.utils.RefactoringTask;
 
 public class MessagingCalculatorTests {
 
-	public SpoonLauncher launcher;
+	public RefactoringTask launcher;
 	
 	/**
 	 * Sets up the Spoon Launcher for each test.
 	 */
 	@Before
 	public void setUp() throws Exception {
-		launcher = new SpoonLauncher();
+		launcher = new RefactoringTask();
 		launcher.addInputSource("src/test/resources/restructureit/qualitymeasurement/processors/messaging");
 		launcher.setOutputSource("src/test/resources/restructureit/qualitymeasurement/processors/messaging");
-		launcher.addRefactoring("restructureit.qualitymeasurement.processors.MessagingCalculator");
-		launcher.processRefactoring();
+		launcher.addProcessor("restructureit.qualitymeasurement.processors.MessagingCalculator");
+		launcher.processCode();
 	}
 
 	/**

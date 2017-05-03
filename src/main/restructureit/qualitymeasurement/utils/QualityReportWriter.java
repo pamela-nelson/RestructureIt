@@ -14,25 +14,32 @@ import restructureit.qualitymeasurement.QualityReport;
  * @author Pamela
  *
  */
-public class QualityReportWriter {
+public final class QualityReportWriter {
 	
 	/**
 	 * Default filepath to create the quality report file.
 	 */
-	private String defaultFilePath = ".//results//";
+	private static String defaultFilePath = "results/";
+	
+	/**
+	 * 
+	 */
+	private QualityReportWriter() {
+	}
 	
 	//PUBLIC METHODS
 	
 	/**
 	 * Creates a quality Report Text file at the specified location with the specified file name.
 	 * @param qualityReport quality report file to write to text file
-	 * @param filePath file path to create quality report
+	 * @param experimentName name of the experiment
+	 * @param projectName name of project
 	 * @param fileName name to call quality report text file
 	 */
-	public void writeQualityReport(final QualityReport qualityReport, final String filePath, final String fileName) {
+	public static void writeQualityReport(final QualityReport qualityReport, final String experimentName, final String projectName, final String fileName) {
 		if (qualityReport.getBeforeRefactoring() != null && qualityReport.getAfterRefactoring() != null) {
 			try {
-				 	File report = new File(String.format("%s%s//%s.txt", defaultFilePath, filePath, fileName));
+				 	File report = new File(String.format("%s%s/%s/%s.txt", defaultFilePath, experimentName, projectName, fileName));
 		            if (report.getParentFile() != null) {
 		                report.getParentFile().mkdirs();
 		            }
@@ -73,7 +80,7 @@ public class QualityReportWriter {
 	 * @param bufferedWriter writer
 	 * @param qualityReport quality report to be written to file
 	 */
-	private void writeProjectDetails(final BufferedWriter bufferedWriter, final QualityReport qualityReport) {
+	private static void writeProjectDetails(final BufferedWriter bufferedWriter, final QualityReport qualityReport) {
 		try {
 				 bufferedWriter.write("======== Project Details ========");
 		         bufferedWriter.newLine();
@@ -81,7 +88,7 @@ public class QualityReportWriter {
 		         bufferedWriter.newLine();
 		         bufferedWriter.write(String.format("Project Location: %s", qualityReport.getProjectLocation()));
 		         bufferedWriter.newLine();
-		         bufferedWriter.write(String.format("Project Size: %s", qualityReport.getBeforeRefactoring().getLinesOfCode()));
+		         bufferedWriter.write(String.format("Project Size: %d", qualityReport.getBeforeRefactoring().getLinesOfCode()));
 		         bufferedWriter.newLine();
 		         bufferedWriter.newLine();
 		 } catch (IOException e) {
@@ -94,7 +101,7 @@ public class QualityReportWriter {
 	 * @param bufferedWriter writer
 	 * @param qualityReport quality report to be written to file
 	 */
-	private void writeRefactoringsAppliedDetails(final BufferedWriter bufferedWriter, final QualityReport qualityReport) {
+	private static void writeRefactoringsAppliedDetails(final BufferedWriter bufferedWriter, final QualityReport qualityReport) {
 		try {
 				bufferedWriter.write("======== Refactoring Details ========");
 	            bufferedWriter.newLine();
@@ -114,12 +121,13 @@ public class QualityReportWriter {
 	 * @param bufferedWriter writer
 	 * @param qualityReport quality report to be written to file
 	 */
-	private void writeQualityBeforeRefactoringDetails(final BufferedWriter bufferedWriter, final QualityReport qualityReport) {
+	private static void writeQualityBeforeRefactoringDetails(final BufferedWriter bufferedWriter, final QualityReport qualityReport) {
 		try {
 			bufferedWriter.write("======== Quality Before Refactoring ========");
             bufferedWriter.newLine();
             //metrics
             bufferedWriter.write("----Metrics----");
+            bufferedWriter.newLine();
             bufferedWriter.write(String.format("Design Size in Class(Design Size): %,.5f", qualityReport.getBeforeRefactoring().getDesignSize()));
             bufferedWriter.newLine();
             bufferedWriter.write(String.format("Number of hierarchies(Hierachies): %,.5f", qualityReport.getBeforeRefactoring().getHierarchies()));
@@ -142,7 +150,7 @@ public class QualityReportWriter {
             bufferedWriter.newLine();
             bufferedWriter.write(String.format("Number of Methods(Complexity): %,.5f", qualityReport.getBeforeRefactoring().getComplexity()));
             bufferedWriter.newLine();
-            bufferedWriter.write(String.format("Lines of code (LOC): %,.5f", qualityReport.getBeforeRefactoring().getLinesOfCode()));
+            bufferedWriter.write(String.format("Lines of code (LOC): %d", qualityReport.getBeforeRefactoring().getLinesOfCode()));
             bufferedWriter.newLine();
             bufferedWriter.newLine();
             
@@ -176,12 +184,13 @@ public class QualityReportWriter {
 	 * @param bufferedWriter writer
 	 * @param qualityReport quality report to be written to file
 	 */
-	private void writeQualityAfterRefactoringDetails(final BufferedWriter bufferedWriter, final QualityReport qualityReport) {
+	private static void writeQualityAfterRefactoringDetails(final BufferedWriter bufferedWriter, final QualityReport qualityReport) {
 		try {
 			bufferedWriter.write("======== Quality After Refactoring ========");
             bufferedWriter.newLine();
             //metrics
             bufferedWriter.write("----Metrics----");
+            bufferedWriter.newLine();
             bufferedWriter.write(String.format("Design Size in Class(Design Size): %,.5f", qualityReport.getAfterRefactoring().getDesignSize()));
             bufferedWriter.newLine();
             bufferedWriter.write(String.format("Number of hierarchies(Hierachies): %,.5f", qualityReport.getAfterRefactoring().getHierarchies()));
@@ -204,7 +213,7 @@ public class QualityReportWriter {
             bufferedWriter.newLine();
             bufferedWriter.write(String.format("Number of Methods(Complexity): %,.5f", qualityReport.getAfterRefactoring().getComplexity()));
             bufferedWriter.newLine();
-            bufferedWriter.write(String.format("Lines of code (LOC): %,.5f", qualityReport.getAfterRefactoring().getLinesOfCode()));
+            bufferedWriter.write(String.format("Lines of code (LOC): %d", qualityReport.getAfterRefactoring().getLinesOfCode()));
             bufferedWriter.newLine();
             bufferedWriter.newLine();
             
@@ -238,12 +247,13 @@ public class QualityReportWriter {
 	 * @param bufferedWriter writer
 	 * @param qualityReport quality report to be written to file
 	 */
-	private void writeQualityChangesDetails(final BufferedWriter bufferedWriter, final QualityReport qualityReport) {
+	private static void writeQualityChangesDetails(final BufferedWriter bufferedWriter, final QualityReport qualityReport) {
 		try {
 			bufferedWriter.write("======== Quality Changes After Refactoring ========");
             bufferedWriter.newLine();
             //metrics
             bufferedWriter.write("----Metrics----");
+            bufferedWriter.newLine();
             bufferedWriter.write(String.format("Design Size in Class(Design Size): %,.5f", qualityReport.getDesignSizeChange()));
             bufferedWriter.newLine();
             bufferedWriter.write(String.format("Number of hierarchies(Hierachies): %,.5f", qualityReport.getHierarchiesChange()));

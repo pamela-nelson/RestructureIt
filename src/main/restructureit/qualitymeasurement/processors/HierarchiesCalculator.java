@@ -20,6 +20,13 @@ public class HierarchiesCalculator extends AbstractProcessor<CtClass<?>> {
 		public static int getHierarchies() {
 			return numHierarchies;
 		}
+		
+		/**
+		 * Resets hierarchies value to zero.
+		 */
+		public static void resetHierarchiesValue() {
+			numHierarchies = 0;
+		}
 
 		/**
 		 * Determines if this class is the root of a class hierarchy.

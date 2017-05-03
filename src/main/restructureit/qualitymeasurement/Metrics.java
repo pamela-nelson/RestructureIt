@@ -16,6 +16,11 @@ public class Metrics implements Serializable {
 	//METRICS
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Design Size in Class(DSC): Total number of classes in the design.
 	 */
 	private double designSize;

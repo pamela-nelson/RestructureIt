@@ -1,0 +1,84 @@
+======== MANGO QUALITY REPORT ========
+======== Project Details ========
+Project Name: mango
+Project Location: sources/original/mango
+Project Size: 1867
+
+======== Refactoring Details ========
+Refactoring Type: CollapseHierarchy 	 Applied: 0
+
+======== Quality Before Refactoring ========
+----Metrics----
+Design Size in Class(Design Size): 90.00000
+Number of hierarchies(Hierachies): 81.00000
+Average Number of Ancestors(Abstraction): 0.21111
+Data Access Metrics (Encapsulation): 0.57778
+Direct Class Coupling(Coupling): 0.11111
+Cohesion Among Methods in Class(Cohesion): 0.68214
+Measure of Aggregation(Composition): 0.96667
+Measure of Functional Abstraction(Inheritance): 0.09480
+Number of Polymorphic Methods(Polymorphism): 0.00000
+Class Interface Size(Messaging): 3.12222
+Number of Methods(Complexity): 3.18889
+Lines of code (LOC): 1867
+
+----Quality Attributes----
+Reusability: 46.70387
+Flexability: 0.60000
+Understandability: -30.44289
+Functionality: 38.38875
+Extendability: 0.09740
+Effectiveness: 0.37007
+------------------------------------------------------------------
+Quality Score: 55.71719
+
+======== Quality After Refactoring ========
+----Metrics----
+Design Size in Class(Design Size): 90.00000
+Number of hierarchies(Hierachies): 81.00000
+Average Number of Ancestors(Abstraction): 0.21111
+Data Access Metrics (Encapsulation): 0.57778
+Direct Class Coupling(Coupling): 0.11111
+Cohesion Among Methods in Class(Cohesion): 0.68214
+Measure of Aggregation(Composition): 0.96667
+Measure of Functional Abstraction(Inheritance): 0.09480
+Number of Polymorphic Methods(Polymorphism): 0.00000
+Class Interface Size(Messaging): 3.12222
+Number of Methods(Complexity): 3.18889
+Lines of code (LOC): 1867
+
+----Quality Attributes----
+Reusability: 46.70387
+Flexability: 0.60000
+Understandability: -30.44289
+Functionality: 38.38875
+Extendability: 0.09740
+Effectiveness: 0.37007
+------------------------------------------------------------------
+Quality Score: 55.71719
+
+======== Quality Changes After Refactoring ========
+----Metrics----
+Design Size in Class(Design Size): 0.00000
+Number of hierarchies(Hierachies): 0.00000
+Average Number of Ancestors(Abstraction): 0.00000
+Data Access Metrics (Encapsulation): 0.00000
+Direct Class Coupling(Coupling): 0.00000
+Cohesion Among Methods in Class(Cohesion): 0.00000
+Measure of Aggregation(Composition): 0.00000
+Measure of Functional Abstraction(Inheritance): 0.00000
+Number of Polymorphic Methods(Polymorphism): 0.00000
+Class Interface Size(Messaging): 0.00000
+Number of Methods(Complexity): 0.00000
+Lines of code (LOC): 0.00000
+
+----Quality Attributes----
+Reusability: 0.00000
+Flexability: 0.00000
+Understandability: 0.00000
+Functionality: 0.00000
+Extendability: 0.00000
+Effectiveness: 0.00000
+------------------------------------------------------------------
+Quality Score: 0.00000
+

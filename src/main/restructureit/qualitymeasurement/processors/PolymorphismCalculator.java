@@ -3,6 +3,7 @@ package restructureit.qualitymeasurement.processors;
 import java.util.List;
 import java.util.Set;
 
+import restructureit.refactorings.utils.RefactoringHelperUtils;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtMethod;
@@ -38,6 +39,13 @@ public class PolymorphismCalculator extends AbstractProcessor<CtClass<?>> {
 	public static double getPolymorphism() {
 		return polymorphism;
 	}
+	
+	/**
+	 * Resets polymorphism value to zero.
+	 */
+	public static void resetPolymorphismValue() {
+		polymorphism = 0;
+	}
 
 	/**
 	 * Calculates the complexity of the project.
@@ -50,7 +58,7 @@ public class PolymorphismCalculator extends AbstractProcessor<CtClass<?>> {
 		
 		numClasses++;
 		classMethods = ctClass.getMethods();
-		childClasses = getAllSubClasses(ctClass);
+		childClasses = RefactoringHelperUtils.getAllSubClasses(ctClass);
 		
 		for (CtMethod<?> method : classMethods) {
 			boolean isPolymorphic = false;
@@ -62,8 +70,7 @@ public class PolymorphismCalculator extends AbstractProcessor<CtClass<?>> {
 				
 				for (CtMethod<?> childMethod : childClassMethods) {
 					
-					if (childMethod.getSimpleName().equals(methodName) 
-							&& childMethod.getParameters().equals(methodParameters)) {
+					if (childMethod.getSignature().equals(method.getSignature())) {
 						isPolymorphic = true;
 						totalNumPolymorphicMethods++;
 						break;
@@ -82,37 +89,5 @@ public class PolymorphismCalculator extends AbstractProcessor<CtClass<?>> {
 	 */
 	public void processingDone() {
 		polymorphism = (double) totalNumPolymorphicMethods / (double) numClasses;
-	}
-	
-	/**
-	 * Retrieves all the direct and indirect children of a given class.
-	 * @param ctClass class to get children of
-	 * @return children of ctClass
-	 */
-	private List<CtClass<?>> getAllSubClasses(final CtClass<?> ctClass) {
-		return Query.getElements(ctClass.getFactory(), new AbstractFilter<CtClass<?>>(CtClass.class) {
-			@Override
-			public boolean matches(final CtClass<?> element) {
-				CtClass<?> candidateSuperClass;
-				CtClass<?> tempElement = element;
-				
-				if (element.getSuperclass() != null) {
-					
-					while (tempElement.getSuperclass() != null) {
-						candidateSuperClass = (CtClass<?>) tempElement.getSuperclass().getDeclaration();
-						
-						if (ctClass.equals(candidateSuperClass)) {
-							return true;
-						}
-						
-						if (tempElement.getSuperclass() != null) {
-							tempElement = (CtClass<?>) tempElement.getSuperclass().getDeclaration();
-						}
-					}		
-				}
-				
-				return false;
-			}
-		});
 	}
 }

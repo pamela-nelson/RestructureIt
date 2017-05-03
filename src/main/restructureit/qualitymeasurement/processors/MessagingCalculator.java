@@ -34,6 +34,13 @@ public class MessagingCalculator extends AbstractProcessor<CtClass<?>> {
 	public static double getMessaging() {
 		return messaging;
 	}
+	
+	/**
+	 * Resets messaging value to zero.
+	 */
+	public static void resetMessagingValue() {
+		messaging = 0;
+	}
 
 	/**
 	 * Calculates the messaging of the project.

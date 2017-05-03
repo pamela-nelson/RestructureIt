@@ -30,6 +30,13 @@ public class InheritanceCalculator extends AbstractProcessor<CtClass<?>> {
 	public static double getInheritance() {
 		return inheritance;
 	}
+	
+	/**
+	 * Resets inheritance value to zero.
+	 */
+	public static void resetInheritanceValue() {
+		inheritance = 0;
+	}
 
 	/**
 	 * Calculates the inheritance of the project.

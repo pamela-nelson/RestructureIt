@@ -24,6 +24,11 @@ public class QualityReport {
 	 */
 	private String projectLocation;
 	
+	/**
+	 * Default project file path.
+	 */
+	private String defaultProjectPath = "sources/original/";
+	
 	//PROGRAM METRICS BEFORE/AFTER
 	
 	/**
@@ -156,6 +161,7 @@ public class QualityReport {
 	 */
 	public void setProjectName(final String projectName) {
 		this.projectName = projectName;
+		setProjectLocation(defaultProjectPath + projectName);
 	}
 
 	/**
@@ -213,13 +219,6 @@ public class QualityReport {
 	 */
 	public double getAbstractionChange() {
 		return abstractionChange;
-	}
-
-	/**
-	 * @param abstractionChange the abstractionChange to set
-	 */
-	public void setAbstractionChange(final double abstractionChange) {
-		this.abstractionChange = abstractionChange;
 	}
 
 	/**
@@ -394,5 +393,4 @@ public class QualityReport {
 			qualityScoreChange = afterRefactoring.getQualityScore() - beforeRefactoring.getQualityScore();	
 		}
 	}
-
 }

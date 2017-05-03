@@ -31,6 +31,13 @@ public class AbstractionCalculator extends AbstractProcessor<CtClass<?>> {
 	public static double getAbstraction() {
 		return abstraction;
 	}
+	
+	/**
+	 * Resets abstraction value to zero.
+	 */
+	public static void resetAbstractionValue() {
+		abstraction = 0;
+	}
 
 	/**
 	 * Calculates the average number of ancestors of the project.
@@ -42,9 +49,9 @@ public class AbstractionCalculator extends AbstractProcessor<CtClass<?>> {
 		
 		CtClass<?> tempClass = ctClass;
 		
-		while (tempClass.getParent() != null) {
+		while (tempClass.getParent(CtClass.class) != null) {
 			totalDistanceFromRoot++;
-			tempClass = (CtClass<?>) tempClass.getParent();
+			tempClass = (CtClass<?>) tempClass.getParent(CtClass.class);
 		}
 	}
 	

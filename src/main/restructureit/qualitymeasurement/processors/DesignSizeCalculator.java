@@ -20,6 +20,13 @@ public class DesignSizeCalculator extends AbstractProcessor<CtClass<?>> {
 	public static int getDesignSize() {
 		return numClasses;
 	}
+	
+	/**
+	 * Resets design size value to zero.
+	 */
+	public static void resetDesignSizeValue() {
+		numClasses = 0;
+	}
 
 	/**
 	 * Calculates the design size of the project.

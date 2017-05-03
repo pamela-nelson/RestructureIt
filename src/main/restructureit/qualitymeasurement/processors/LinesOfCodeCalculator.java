@@ -21,6 +21,13 @@ public class LinesOfCodeCalculator extends AbstractProcessor<CtStatement> {
 	}
 	
 	/**
+	 * Resets lines of code value to zero.
+	 */
+	public static void resetLinesOfCodeValue() {
+		loc = 0;
+	}
+	
+	/**
 	 * @param statement line of code
 	 */
 	public void process(final CtStatement statement) {

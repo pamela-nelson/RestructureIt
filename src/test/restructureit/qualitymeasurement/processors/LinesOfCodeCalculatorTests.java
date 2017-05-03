@@ -4,22 +4,22 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import restructureit.utils.SpoonLauncher;
+import restructureit.utils.QualityMeasurementTask;
 
 public class LinesOfCodeCalculatorTests {
 
-	public SpoonLauncher launcher;
+	public QualityMeasurementTask launcher;
 	
 	/**
 	 * Sets up the Spoon Launcher for each test.
 	 */
 	@Before
 	public void setUp() throws Exception {
-		launcher = new SpoonLauncher();
+		launcher = new QualityMeasurementTask();
 		launcher.addInputSource("src/test/resources/restructureit/qualitymeasurement/processors/loc");
 		launcher.setOutputSource("src/test/resources/restructureit/qualitymeasurement/processors/loc");
-		launcher.addRefactoring("restructureit.qualitymeasurement.processors.LinesOfCodeCalculator");
-		launcher.processRefactoring();
+		launcher.addProcessor("restructureit.qualitymeasurement.processors.LinesOfCodeCalculator");
+		launcher.processCode();
 	}
 
 	/**

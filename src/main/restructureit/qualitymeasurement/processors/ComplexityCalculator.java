@@ -33,6 +33,13 @@ public class ComplexityCalculator extends AbstractProcessor<CtClass<?>> {
 	public static double getComplexity() {
 		return complexity;
 	}
+	
+	/**
+	 * Resets complexity value to zero.
+	 */
+	public static void resetComplexityValue() {
+		complexity = 0;
+	}
 
 	/**
 	 * Calculates the complexity of the project.

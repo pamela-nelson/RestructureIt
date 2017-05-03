@@ -2,7 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src/main"/>
 	<classpathentry excluding="resources/" kind="src" path="src/test"/>
-	<classpathentry kind="src" path="src/test/resources"/>
+	<classpathentry excluding="restructureit/refactorings/processors/pullupmethod/pullupmethodexpected/|restructureit/refactorings/processors/pullupmethod/refactoredtestresults/|restructureit/refactorings/processors/pullupmethod/Expected/|restructureit/refactorings/processors/pullupmethod/Results/|restructureit/refactorings/processors/pullupfield/Expected/|restructureit/refactorings/processors/pullupfield/Results/|restructureit/refactorings/processors/encapsulatefield/Expected/|restructureit/refactorings/processors/encapsulatefield/Results/|restructureit/refactorings/processors/pushdownfield/Expected/|restructureit/refactorings/processors/pushdownfield/Results/|restructureit/refactorings/processors/pushdownmethod/Expected/|restructureit/refactorings/processors/pushdownmethod/Results/|restructureit/refactorings/processors/hidemethod/Expected/|restructureit/refactorings/processors/hidemethod/Results/|restructureit/refactorings/processors/collapsehierarchy/Expected/|restructureit/refactorings/processors/collapsehierarchy/Results/|restructureit/refactorings/processors/encapsulatecollection/Expected/|restructureit/refactorings/processors/encapsulatecollection/Results/|restructureit/refactorings/processors/extractsuperclass/Expected/|restructureit/refactorings/processors/extractsuperclass/Results/" kind="src" path="src/test/resources"/>
+	<classpathentry kind="src" path="sources/original/mango/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
@@ -11,5 +12,6 @@
 			<attribute name="javadoc_location" value="jar:file:/D:/Documents/MEGA/Final%20Year%20Project/Project/RestructureIt/lib/spoon-core-5.5.0-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="experimentlibs/beaver-rt-0.9.11.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
